@@ -37,8 +37,9 @@ function! ZF_AsciiPlayer_pillow_converterInit(params)
     catch
     endtry
 
-    let convertResult = substitute(convertResult, '^[\r\n]\+', '', '')
-    let convertResult = substitute(convertResult, '[\r\n]\+$', '', '')
+    let convertResult = substitute(convertResult, '\r\n', '\n', 'g')
+    let convertResult = substitute(convertResult, '^\n\+', '', '')
+    let convertResult = substitute(convertResult, '\n\+$', '', '')
     let asciiFrames = split(convertResult, s:frameSeparator)
     if empty(asciiFrames)
         echomsg '[ZFAsciiPlayer] no frame'
