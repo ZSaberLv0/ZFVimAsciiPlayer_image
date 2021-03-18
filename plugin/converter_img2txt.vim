@@ -7,11 +7,11 @@ function! ZF_AsciiPlayer_pillow_converterInit(params)
     elseif executable('python')
         let py = 'python'
     else
-        echomsg '[ZFAsciiPlayer] no python available'
+        call ZF_AsciiPlayer_log('[ZFAsciiPlayer] no python available')
         return {}
     endif
     if !executable('img2txt.py')
-        echomsg '[ZFAsciiPlayer] img2txt.py not installed'
+        call ZF_AsciiPlayer_log('[ZFAsciiPlayer] img2txt.py not installed')
         return {}
     endif
 
@@ -28,7 +28,7 @@ function! ZF_AsciiPlayer_pillow_converterInit(params)
             call delete(tmpFile)
         catch
         endtry
-        echomsg '[ZFAsciiPlayer] unable to convert: ' . convertResult
+        call ZF_AsciiPlayer_log('[ZFAsciiPlayer] unable to convert: ' . convertResult)
         return {}
     endif
     let convertResult = join(readfile(tmpFile, 'b'), "\n")
@@ -42,7 +42,7 @@ function! ZF_AsciiPlayer_pillow_converterInit(params)
     let convertResult = substitute(convertResult, '\n\+$', '', '')
     let asciiFrames = split(convertResult, s:frameSeparator)
     if empty(asciiFrames)
-        echomsg '[ZFAsciiPlayer] no frame'
+        call ZF_AsciiPlayer_log('[ZFAsciiPlayer] no frame')
         return {}
     endif
     let frameDatas = []
