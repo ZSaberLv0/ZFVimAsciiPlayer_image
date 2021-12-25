@@ -22,7 +22,20 @@ function! ZF_AsciiPlayer_pillow_converterInit(params)
                 \ . ' ' . a:params['maxHeight']
                 \ . ' ' . string(a:params['heightScale'])
                 \ . ' > "' . tmpFile . '"'
-    let convertResult = system(convertCmd)
+    if exists('g:ZFAsciiPlayerLog')
+        let _start_time = reltime()
+        let convertResult = system(convertCmd)
+        call add(g:ZFAsciiPlayerLog,
+                    \   'img2txt.py cmd: '
+                    \   . convertCmd
+                    \ )
+        call add(g:ZFAsciiPlayerLog,
+                    \   'img2txt.py used time: '
+                    \   . float2nr(reltimefloat(reltime(_start_time, reltime())) * 1000)
+                    \ )
+    else
+        let convertResult = system(convertCmd)
+    endif
     if v:shell_error != 0
         try
             call delete(tmpFile)
@@ -46,9 +59,21 @@ function! ZF_AsciiPlayer_pillow_converterInit(params)
         return {}
     endif
     let frameDatas = []
-    for asciiFrame in asciiFrames
-        call add(frameDatas, ZF_AsciiPlayer_terminalHLToHLCmd(asciiFrame))
-    endfor
+
+    if exists('g:ZFAsciiPlayerLog')
+        let _start_time = reltime()
+        for asciiFrame in asciiFrames
+            call add(frameDatas, ZF_AsciiPlayer_terminalHLToHLCmd(asciiFrame))
+        endfor
+        call add(g:ZFAsciiPlayerLog,
+                    \   'img2txt.py terminalHL used time: '
+                    \   . float2nr(reltimefloat(reltime(_start_time, reltime())) * 1000)
+                    \ )
+    else
+        for asciiFrame in asciiFrames
+            call add(frameDatas, ZF_AsciiPlayer_terminalHLToHLCmd(asciiFrame))
+        endfor
+    endif
 
     return {
                 \   'fps' : -1,
