@@ -12,7 +12,7 @@ or [buy me a coffee](https://github.com/ZSaberLv0/ZSaberLv0)
 # Install
 
 1. ensure `python` or `python3` available in `$PATH`
-1. `pip install img2txt.py`, [see also](https://github.com/hit9/img2txt)
+1. `pip install docopt Pillow`, [see also](https://github.com/hit9/img2txt)
 1. use [vim-plug](https://github.com/junegunn/vim-plug) or any other plugin manager you like to install
 
     ```

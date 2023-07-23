@@ -10,10 +10,6 @@ function! ZF_AsciiPlayer_pillow_converterInit(params)
         call ZF_AsciiPlayer_log('[ZFAsciiPlayer] no python available')
         return {}
     endif
-    if !executable('img2txt.py')
-        call ZF_AsciiPlayer_log('[ZFAsciiPlayer] img2txt.py not installed')
-        return {}
-    endif
 
     let tmpFile = CygpathFix_absPath(tempname())
     let convertCmd = py . ' "' . s:scriptPath . '/img2txt.py"'
