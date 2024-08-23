@@ -11,8 +11,6 @@ or [buy me a coffee](https://github.com/ZSaberLv0/ZSaberLv0)
 
 # Install
 
-1. ensure `python` or `python3` available in `$PATH`
-1. `pip install docopt Pillow`, [see also](https://github.com/hit9/img2txt)
 1. use [vim-plug](https://github.com/junegunn/vim-plug) or any other plugin manager you like to install
 
     ```
@@ -20,8 +18,13 @@ or [buy me a coffee](https://github.com/ZSaberLv0/ZSaberLv0)
     Plug 'ZSaberLv0/ZFVimAsciiPlayer_image'
     ```
 
+1. install external dependencies: (any one would work)
+
+    * [atanunq/viu](https://github.com/atanunq/viu) : better rendering, but slower
+    * `pip install docopt Pillow` : a bit faster than viu, but with lower resolution
+
+
 supported file types:
-(any file that [Pillow](https://github.com/python-pillow/Pillow) supports should work)
 
 * `bmp`
 * `gif`
